@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.FieldsLogInFragment">
+
+    <EditText
+        android:id="@+id/edit_text_login"
+        android:layout_width="298dp"
+        android:layout_height="41dp"
+        android:hint="@string/login"
+        android:textColorHint="@color/txt_grey"
+        android:elevation="8dp"
+        android:background="@drawable/text_field_shape"
+        android:paddingStart="16dp"
+        android:fontFamily="@font/poppins_regular"
+        android:layout_margin="16dp"
+        app:layout_constraintBottom_toTopOf="@id/edit_text_password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="RtlSymmetry"
+        android:autofillHints="login"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/edit_text_password"
+        android:layout_width="298dp"
+        android:layout_height="41dp"
+        android:autofillHints="password"
+        android:background="@drawable/text_field_shape"
+        android:elevation="8dp"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:paddingStart="16dp"
+        android:fontFamily="@font/poppins_regular"
+        android:textColorHint="@color/txt_grey"
+        android:layout_margin="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_text_login"
+        tools:ignore="RtlSymmetry" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,43 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Zwaar</string>
+    <string name="description">Welcome to <b><font color="#F9CB5C">Zwaar®</font></b>! The place to rack your workouts, achieve your goals, and stay up to date with your progress. Log in to start your journey to <b><font color="#F9CB5C">better</font></b> physical fitness now!</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="log_in">Log In</string>\
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="consent" tools:ignore="TypographyEllipsis">I accept privacy &amp; polities of Zwaar app and (...)</string>
+    <string name="todays_workout">Today\'s workout</string>
+    <string name="your_progress">Your progress</string>
+    <string name="training_plan">Training plan</string>
+    <string name="all_workouts">All workouts</string>
+    <string name="settings">Settings</string>
+    <string name="notifications">Notifications</string>
+    <string name="change_email">Change e-mail</string>
+    <string name="privacy_policy">Privacy policy</string>
+    <string name="profile">Profile</string>
+    <string name="gender">Gender:</string>
+    <string name="height">Height:</string>
+    <string name="weight">Weight:</string>
+    <string name="weight_save_info">weight change is saved to personal data history</string>
+    <string name="your_bmi">Your BMI:</string>
+    <string name="bmi_placeholder">BMI \n placeholder</string>
+    <string name="save_changes">save changes</string>
+    <string name="training_history">Training history</string>
+    <string name="personal_data_history">Personal data history</string>
+    <string name="workouts">Workouts</string>
+    <string name="enter_name">Enter name</string>
+    <string name="add">Add</string>
+    <string name="hi_xyz">Hi, XYZ!</string>
+    <string name="workout_name">Workout name</string>
+    <string name="select_exercise">Select exercise</string>
+    <string name="and">and</string>
+    <string name="add_weight">Add weight (kgs)</string>
+    <string name="add_series">Add series</string>
+    <string name="select_gear">Select gear</string>
+    <string name="add_training_gear">Add training gear</string>
+    <string name="my_gear">My gear</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_gear">Search gear</string>
+</resources>

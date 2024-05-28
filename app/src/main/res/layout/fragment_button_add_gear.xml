@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.ButtonAddGearFragment">
+
+    <Button
+        style="@style/Widget.Material3.Button.ElevatedButton.Icon"
+        android:id="@+id/button_add_gear"
+        android:layout_width="241dp"
+        android:layout_height="53dp"
+        android:text="@string/add_training_gear"
+        android:textSize="20sp"
+        android:layout_margin="16dp"
+        android:fontFamily="@font/poppins_regular"
+        android:width="182dp"
+        android:height="53dp"
+        android:textColor="@color/txt_color_1"
+        android:backgroundTint="@color/secondary_yellow" />
+
+</FrameLayout>

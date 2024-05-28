@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="82dp"
+    android:background="@color/secondary_grey"
+    android:orientation="horizontal"
+    tools:context=".fragments.NavigationBarFragment">
+
+    <ImageButton
+        android:id="@+id/image_button_date"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_margin="8dp"
+        android:src="@drawable/ic_action_date_range"
+        android:background="@android:color/transparent"
+        tools:ignore="ContentDescription" />
+
+    <ImageButton
+        android:id="@+id/image_button_profile"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_margin="8dp"
+        android:src="@drawable/ic_action_account_box"
+        android:background="@android:color/transparent"
+        tools:ignore="ContentDescription" />
+
+    <ImageButton
+        android:id="@+id/image_button_settings"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_margin="8dp"
+        android:src="@drawable/ic_action_settings_applications"
+        android:background="@android:color/transparent"
+        tools:ignore="ContentDescription" />
+
+</LinearLayout>
