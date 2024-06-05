@@ -2,6 +2,7 @@ package put.inf154030.zwaar.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.CheckBox
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import put.inf154030.zwaar.R
@@ -12,6 +13,7 @@ import put.inf154030.zwaar.fragments.FieldsSignUpFragment
 class SignUpActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignUpBinding
+    private lateinit var checkboxAgreement: CheckBox
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,10 +26,11 @@ class SignUpActivity : AppCompatActivity() {
             .replace(R.id.fragment_container_fields, FieldsSignUpFragment())
             .replace(R.id.fragment_container_button, ButtonSignUpFragment())
             .commit()
+
+        checkboxAgreement = binding.checkboxAgreement
     }
 
-    fun startHomeScreenActivity() {
-        val intent = Intent(this, HomeScreenActivity::class.java)
-        startActivity(intent)
+    fun getCheckBoxState(): Boolean {
+        return checkboxAgreement.isChecked
     }
 }

@@ -5,14 +5,31 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import put.inf154030.zwaar.R
 
 class FieldsLogInFragment : Fragment() {
+
+    private lateinit var loginField: EditText
+    private lateinit var passwordField: EditText
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_fields_log_in, container, false)
+        val view = inflater.inflate(R.layout.fragment_fields_log_in, container, false)
+
+        loginField = view.findViewById(R.id.edit_text_login)
+        passwordField = view.findViewById(R.id.edit_text_password)
+
+        return view
+    }
+
+    fun getLogin(): String {
+        return loginField.text.toString()
+    }
+
+    fun getPassword(): String {
+        return passwordField.text.toString()
     }
 }

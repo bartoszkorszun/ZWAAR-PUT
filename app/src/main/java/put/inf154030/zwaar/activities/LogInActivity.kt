@@ -25,9 +25,4 @@ class LogInActivity : AppCompatActivity() {
             .replace(R.id.fragment_container_buttons, ButtonLogInFragment())
             .commit()
     }
-
-    fun startHomeScreenActivity() {
-        val intent = Intent(this, HomeScreenActivity::class.java)
-        startActivity(intent)
-    }
 }
