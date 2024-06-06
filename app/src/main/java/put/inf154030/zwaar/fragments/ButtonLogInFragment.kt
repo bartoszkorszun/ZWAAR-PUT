@@ -14,6 +14,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import put.inf154030.zwaar.MainActivity
 import put.inf154030.zwaar.R
+import put.inf154030.zwaar.UserSession
 import put.inf154030.zwaar.activities.HomeScreenActivity
 import put.inf154030.zwaar.activities.LogInActivity
 import put.inf154030.zwaar.database.DatabaseProvider
@@ -46,7 +47,7 @@ class ButtonLogInFragment : Fragment() {
 
                     if (isPasswordCorrect) {
                         val db = DatabaseProvider.getDatabase(activity as LogInActivity)
-                        println(db.userDao.getUserId(login))
+                        UserSession.loggedInUserId = db.userDao.getUserId(login)
 
                         val intent = Intent(requireActivity(), HomeScreenActivity::class.java)
                         startActivity(intent)

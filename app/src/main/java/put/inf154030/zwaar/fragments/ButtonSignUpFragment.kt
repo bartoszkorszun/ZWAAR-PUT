@@ -13,6 +13,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import put.inf154030.zwaar.MainActivity
 import put.inf154030.zwaar.R
+import put.inf154030.zwaar.UserSession
 import put.inf154030.zwaar.activities.HomeScreenActivity
 import put.inf154030.zwaar.activities.LogInActivity
 import put.inf154030.zwaar.activities.ProfileActivity
@@ -61,6 +62,7 @@ class ButtonSignUpFragment : Fragment() {
 
                     lifecycleScope.launch(Dispatchers.IO) {
                         db.userDao.inserUser(user)
+                        UserSession.loggedInUserId = db.userDao.getUserId(user.login)
                     }
 
                     val intent = Intent(requireActivity(), HomeScreenActivity::class.java)

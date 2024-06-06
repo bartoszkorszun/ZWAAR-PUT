@@ -53,10 +53,13 @@
                 android:textSize="24sp"
                 android:layout_weight="1"/>
 
-            <TextView
+            <EditText
+                android:id="@+id/edit_text_gender"
                 android:layout_width="210dp"
                 android:layout_height="56dp"
-                android:background="@drawable/border_background"/>
+                android:textAlignment="center"
+                android:background="@drawable/border_background"
+                tools:ignore="Autofill,LabelFor,TextFields" />
 
         </LinearLayout>
 
@@ -95,10 +98,14 @@
                 android:textSize="24sp"
                 android:layout_weight="1"/>
 
-            <TextView
+            <EditText
+                android:id="@+id/edit_text_height"
                 android:layout_width="210dp"
                 android:layout_height="56dp"
-                android:background="@drawable/border_background"/>
+                android:textAlignment="center"
+                android:inputType="number"
+                android:background="@drawable/border_background"
+                tools:ignore="Autofill,LabelFor,TextFields"/>
 
         </LinearLayout>
 
@@ -137,10 +144,14 @@
                 android:textSize="24sp"
                 android:layout_weight="1"/>
 
-            <TextView
+            <EditText
+                android:id="@+id/edit_text_weight"
                 android:layout_width="210dp"
                 android:layout_height="56dp"
-                android:background="@drawable/border_background"/>
+                android:textAlignment="center"
+                android:inputType="number"
+                android:background="@drawable/border_background"
+                tools:ignore="Autofill,LabelFor,TextFields"/>
 
         </LinearLayout>
 
@@ -184,6 +195,7 @@
             android:layout_marginStart="8dp"/>
 
         <TextView
+            android:id="@+id/text_view_bmi"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

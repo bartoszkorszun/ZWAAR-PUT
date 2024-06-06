@@ -4,6 +4,5 @@ import androidx.room.Entity
 
 @Entity(tableName = "settings")
 data class Settings(
-    val notifications: Boolean,
-    val userId: Int
+    val notifications: Boolean
 )

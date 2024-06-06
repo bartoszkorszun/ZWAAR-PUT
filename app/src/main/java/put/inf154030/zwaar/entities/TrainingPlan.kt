@@ -5,7 +5,6 @@ import java.sql.Date
 
 @Entity(tableName = "training_plans")
 data class TrainingPlan(
-    val userId: Int,
-    val workoutId: Int,
+    val trainingPlanId: Int,
     val date: Date
 )
