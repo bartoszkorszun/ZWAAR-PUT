@@ -45,6 +45,9 @@ class ButtonLogInFragment : Fragment() {
                     val isPasswordCorrect = checkPassword(login, password)
 
                     if (isPasswordCorrect) {
+                        val db = DatabaseProvider.getDatabase(activity as LogInActivity)
+                        println(db.userDao.getUserId(login))
+
                         val intent = Intent(requireActivity(), HomeScreenActivity::class.java)
                         startActivity(intent)
                     } else {

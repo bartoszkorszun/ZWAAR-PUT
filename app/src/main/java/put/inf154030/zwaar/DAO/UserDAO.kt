@@ -8,12 +8,12 @@ import put.inf154030.zwaar.entities.User
 
 @Dao
 interface UserDAO {
-    @Query("SELECT * FROM users")
-    suspend fun getAll(): List<User>
-
     @Insert
     suspend fun inserUser(user: User)
 
     @Query("SELECT password FROM users WHERE login = :login")
     suspend fun getUserPassword(login: String): String?
+
+    @Query("SELECT userId FROM users WHERE login = :login")
+    suspend fun getUserId(login: String): Int
 }
