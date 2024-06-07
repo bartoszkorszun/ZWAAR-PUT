@@ -1,15 +1,15 @@
 package put.inf154030.zwaar.activities
 
-import android.content.Context
 import android.os.Bundle
-import android.util.AttributeSet
-import android.view.LayoutInflater
-import android.view.View
 import android.widget.EditText
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 import put.inf154030.zwaar.R
+import put.inf154030.zwaar.UserSession
+import put.inf154030.zwaar.database.DatabaseProvider
 import put.inf154030.zwaar.databinding.ActivityProfileBinding
 import put.inf154030.zwaar.fragments.ButtonDumbbellFragment
 import put.inf154030.zwaar.fragments.ButtonSaveChangesFragment
@@ -34,6 +34,18 @@ class ProfileActivity : AppCompatActivity() {
         height = binding.editTextHeight
         weight = binding.editTextWeight
         bmi = binding.textViewBmi
+
+        val context = this
+        lifecycleScope.launch {
+            val db = DatabaseProvider.getDatabase(context)
+            val user = db.userDao.getUserById(UserSession.loggedInUserId)
+            if (user?.height != null) {
+                gender.setText(user.gender)
+                height.setText(user.height.toString())
+                weight.setText(user.weight.toString())
+                bmi.text = user.bmi.toString()
+            }
+        }
 
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container_dumbbell, ButtonDumbbellFragment())

@@ -1,5 +1,6 @@
 package put.inf154030.zwaar.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -34,7 +35,7 @@ class ButtonSaveChangesFragment : Fragment() {
             val gender = profileActivity.getGender()
             val height = profileActivity.getHeight().toDouble()
             val weight = profileActivity.getWeight().toDouble()
-            val bmi = calculateBmi(height, weight)
+            val bmi = calculateBmi(height/100, weight)
 
             lifecycleScope.launch {
                 val userId = UserSession.loggedInUserId
@@ -47,8 +48,10 @@ class ButtonSaveChangesFragment : Fragment() {
         return view
     }
 
+    @SuppressLint("DefaultLocale")
     private fun calculateBmi(height: Double, weight: Double): Double {
-        return weight / (height * height)
+        val bmi = weight / (height * height)
+        return String.format("%.1f", bmi).toDouble()
     }
 
     private suspend fun updateUser(
@@ -73,8 +76,10 @@ class ButtonSaveChangesFragment : Fragment() {
                     bmi
                 )
             }
-            if (updatedUser != null)
+            if (updatedUser != null) {
                 db.userDao.updateUser(updatedUser)
+                Toast.makeText((activity as ProfileActivity), "Saved", Toast.LENGTH_SHORT).show()
+            }
             else
                 Toast.makeText((activity as ProfileActivity), "Oops! Something went wrong. Try again", Toast.LENGTH_LONG).show()
         }
