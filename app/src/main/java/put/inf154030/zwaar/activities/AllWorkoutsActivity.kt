@@ -1,9 +1,16 @@
 package put.inf154030.zwaar.activities
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.coroutines.launch
 import put.inf154030.zwaar.R
+import put.inf154030.zwaar.UserSession
+import put.inf154030.zwaar.adapters.WorkoutAdapter
+import put.inf154030.zwaar.database.DatabaseProvider
 import put.inf154030.zwaar.databinding.ActivityAllWorkoutsBinding
 import put.inf154030.zwaar.fragments.ButtonAddFragment
 import put.inf154030.zwaar.fragments.ButtonAddGearFragment
@@ -27,5 +34,22 @@ class AllWorkoutsActivity : AppCompatActivity() {
             .replace(R.id.fragment_container_add_gear, ButtonAddGearFragment())
             .replace(R.id.fragment_container_nav_bar, NavigationBarFragment())
             .commit()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val context = this
+        lifecycleScope.launch {
+            val db = DatabaseProvider.getDatabase(context)
+            val workouts = db.workoutDao.getAllUserWorkouts(UserSession.loggedInUserId)
+            val workoutList = binding.recyclerViewWorkoutsList
+            workoutList.layoutManager = LinearLayoutManager(context)
+            workoutList.adapter = WorkoutAdapter(workouts) {workout ->
+                val intent = Intent(context, WorkoutActivity::class.java)
+                intent.putExtra("workout_name", workout.name)
+                intent.putExtra("workout_id", workout.workoutId)
+                startActivity(intent)
+            }
+        }
     }
 }

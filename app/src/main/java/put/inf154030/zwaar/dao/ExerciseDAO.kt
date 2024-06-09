@@ -7,12 +7,12 @@ import put.inf154030.zwaar.entities.Exercise
 
 @Dao
 interface ExerciseDAO {
-    @Query("SELECT * FROM exercises")
-    suspend fun getAll(): List<Exercise>
-
     @Insert
     suspend fun insertExercise(exercise: Exercise)
 
     @Query("SELECT * FROM exercises WHERE exerciseId = :exerciseId")
     suspend fun getExerciseById(exerciseId: Int): Exercise
+
+    @Query("SELECT * FROM exercises WHERE exerciseId IN (:ids)")
+    suspend fun getAllExercisesWhereIdIn(ids: List<Int>): List<Exercise>
 }

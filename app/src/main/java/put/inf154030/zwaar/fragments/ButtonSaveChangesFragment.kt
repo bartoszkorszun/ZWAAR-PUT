@@ -2,6 +2,7 @@ package put.inf154030.zwaar.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -78,10 +79,7 @@ class ButtonSaveChangesFragment : Fragment() {
             }
             if (updatedUser != null) {
                 db.userDao.updateUser(updatedUser)
-                Toast.makeText((activity as ProfileActivity), "Saved", Toast.LENGTH_SHORT).show()
             }
-            else
-                Toast.makeText((activity as ProfileActivity), "Oops! Something went wrong. Try again", Toast.LENGTH_LONG).show()
         }
     }
 }
