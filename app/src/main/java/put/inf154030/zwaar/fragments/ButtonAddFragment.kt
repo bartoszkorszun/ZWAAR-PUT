@@ -32,6 +32,7 @@ class ButtonAddFragment : Fragment() {
             }
             if (activity is WorkoutActivity) {
                 val intent = Intent(activity as WorkoutActivity, AddExerciseActivity::class.java)
+                intent.putExtra("workout_id", (activity as WorkoutActivity).getWorkoutId())
                 startActivity(intent)
             }
             if (activity is MyGearActivity) {

@@ -15,4 +15,7 @@ interface ExerciseDAO {
 
     @Query("SELECT * FROM exercises WHERE exerciseId IN (:ids)")
     suspend fun getAllExercisesWhereIdIn(ids: List<Int>): List<Exercise>
+
+    @Query("SELECT * FROM exercises")
+    suspend fun getAll(): List<Exercise>
 }

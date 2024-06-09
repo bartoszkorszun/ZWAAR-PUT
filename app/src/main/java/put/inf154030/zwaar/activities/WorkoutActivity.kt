@@ -47,7 +47,7 @@ class WorkoutActivity : AppCompatActivity() {
             val workoutExerciseList = binding.recyclerViewExercisesList
             workoutExerciseList.layoutManager = LinearLayoutManager(context)
             workoutExerciseList.adapter = ExerciseAdapter(exercises) {exercise ->
-                val intent = Intent(context, AddWorkoutActivity::class.java)
+                val intent = Intent(context, AddExerciseActivity::class.java)
                 intent.putExtra("exercise_id", exercise.exerciseId)
                 intent.putExtra("workout_id", workoutId)
                 startActivity(intent)
