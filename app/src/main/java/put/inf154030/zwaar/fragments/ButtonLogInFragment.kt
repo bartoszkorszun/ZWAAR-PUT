@@ -21,6 +21,8 @@ import put.inf154030.zwaar.database.DatabaseProvider
 
 class ButtonLogInFragment : Fragment() {
 
+    private val db = DatabaseProvider.getDatabase(requireActivity())
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,7 +48,6 @@ class ButtonLogInFragment : Fragment() {
                     val isPasswordCorrect = checkPassword(login, password)
 
                     if (isPasswordCorrect) {
-                        val db = DatabaseProvider.getDatabase(activity as LogInActivity)
                         UserSession.loggedInUserId = db.userDao.getUserId(login)
 
                         val intent = Intent(requireActivity(), HomeScreenActivity::class.java)

@@ -23,6 +23,8 @@ import put.inf154030.zwaar.entities.User
 
 class ButtonSignUpFragment : Fragment() {
 
+    private val db = DatabaseProvider.getDatabase(requireActivity())
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -47,8 +49,6 @@ class ButtonSignUpFragment : Fragment() {
                 val isCheckboxChecked = (activity as SignUpActivity).getCheckBoxState()
 
                 if (isCheckboxChecked) {
-                    val db = DatabaseProvider.getDatabase(activity as SignUpActivity)
-
                     val user = User(
                         userId = 0,
                         login = login,

@@ -18,6 +18,8 @@ import put.inf154030.zwaar.entities.Workout
 
 class AddWorkoutFragment : Fragment() {
 
+    private val db = DatabaseProvider.getDatabase(requireActivity())
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -29,7 +31,6 @@ class AddWorkoutFragment : Fragment() {
 
         buttonAdd.setOnClickListener {
             lifecycleScope.launch {
-                val db = DatabaseProvider.getDatabase(activity as AddWorkoutActivity)
                 val workout = Workout(
                     0,
                     editTextWorkoutName.text.toString(),

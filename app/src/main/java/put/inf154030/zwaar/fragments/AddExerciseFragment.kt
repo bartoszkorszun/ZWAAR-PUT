@@ -25,6 +25,7 @@ class AddExerciseFragment : Fragment() {
     private var exerciseId: Int = -1
     private var workoutId: Int = -1
     private var isPassedFromActivity: Boolean = false
+    private val db = DatabaseProvider.getDatabase(requireActivity())
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,7 +42,6 @@ class AddExerciseFragment : Fragment() {
         workoutId = (activity as AddExerciseActivity).getWorkoutId()
 
         lifecycleScope.launch {
-            val db = DatabaseProvider.getDatabase(requireActivity())
             val exercises = db.exerciseDao.getAll()
             val exerciseNames = exercises.map { it.name }
             exerciseMap = exercises.associateBy({ it.name }, {it.exerciseId})
@@ -60,15 +60,13 @@ class AddExerciseFragment : Fragment() {
 
         autoCompleteTextView.setOnItemClickListener { parent, _, position, _ ->
             val selectedExerciseId = exerciseMap[parent.getItemAtPosition(position) as String]
-            if (selectedExerciseId != null) {
+            if (selectedExerciseId != null)
                 exerciseId = selectedExerciseId
-            }
         }
 
         addButton.setOnClickListener {
             if (isPassedFromActivity) {
                 lifecycleScope.launch {
-                    val db = DatabaseProvider.getDatabase(requireActivity())
                     val workoutExercise = db.workoutExerciseDao.getWorkoutExerciseByIds(workoutId, exerciseId)
                     val updatedWorkoutExercise = workoutExercise?.let {
                         workoutExercise.copy(
@@ -89,7 +87,6 @@ class AddExerciseFragment : Fragment() {
                 }
             } else {
                 lifecycleScope.launch {
-                    val db = DatabaseProvider.getDatabase(requireActivity())
                     val workoutExercise = WorkoutExercise(
                         0,
                         workoutId,

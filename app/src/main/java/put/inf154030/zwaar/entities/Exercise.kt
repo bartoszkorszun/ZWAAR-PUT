@@ -5,18 +5,9 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
-@Entity(
-    tableName = "exercises",
-    foreignKeys = [
-        ForeignKey(
-            entity = Gear::class,
-            parentColumns = ["gearId"],
-            childColumns = ["gearId"]
-        )
-    ]
-)
+@Entity("exercises")
 data class Exercise(
     @PrimaryKey(autoGenerate = true) val exerciseId: Int,
-    @ColumnInfo(name = "name") val name: String,
-    val gearId: Int
+    @ColumnInfo("name") val name: String,
+    @ColumnInfo("gear_id") val gearId: Int
 )

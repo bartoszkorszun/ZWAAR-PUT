@@ -16,6 +16,7 @@ import put.inf154030.zwaar.fragments.NavigationBarFragment
 class HomeScreenActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomeScreenBinding
+    private val db = DatabaseProvider.getDatabase(this)
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,9 +31,7 @@ class HomeScreenActivity : AppCompatActivity() {
             .replace(R.id.fragment_container_nav_bar, NavigationBarFragment())
             .commit()
 
-        val context = this
         lifecycleScope.launch {
-            val db = DatabaseProvider.getDatabase(context)
             val userLogin = db.userDao.getUserLogin(UserSession.loggedInUserId)
             binding.textViewName.text = "Hi, $userLogin!"
         }

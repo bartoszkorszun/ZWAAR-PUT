@@ -7,7 +7,7 @@ import put.inf154030.zwaar.entities.Workout
 
 @Dao
 interface WorkoutDAO {
-    @Query("SELECT * FROM workouts WHERE userId = :userId")
+    @Query("SELECT * FROM workouts WHERE user_id = :userId")
     suspend fun getAllUserWorkouts(userId: Int): List<Workout>
 
     @Insert

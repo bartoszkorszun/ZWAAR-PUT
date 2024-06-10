@@ -4,9 +4,9 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "workouts")
+@Entity("workouts")
 data class Workout(
     @PrimaryKey(autoGenerate = true) val workoutId: Int,
-    @ColumnInfo(name = "name") val name: String,
-    @ColumnInfo(name = "userId") val userId: Int
+    @ColumnInfo("name") val name: String,
+    @ColumnInfo("user_id") val userId: Int
 )
