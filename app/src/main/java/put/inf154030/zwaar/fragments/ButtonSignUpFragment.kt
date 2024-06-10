@@ -60,7 +60,7 @@ class ButtonSignUpFragment : Fragment() {
                         bmi = null
                     )
 
-                    lifecycleScope.launch(Dispatchers.IO) {
+                    lifecycleScope.launch {
                         db.userDao.inserUser(user)
                         UserSession.loggedInUserId = db.userDao.getUserId(user.login)
                     }

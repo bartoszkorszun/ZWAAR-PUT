@@ -62,24 +62,25 @@ class ButtonSaveChangesFragment : Fragment() {
         weight: Double,
         bmi: Double
         ) {
-        withContext(Dispatchers.IO) {
-            val db = DatabaseProvider.getDatabase(activity as ProfileActivity)
-            val user = db.userDao.getUserById(userId)
-            val updatedUser = user?.let {
-                user.copy(
-                    userId,
-                    it.login,
-                    it.password,
-                    it.email,
-                    gender,
-                    height,
-                    weight,
-                    bmi
-                )
-            }
-            if (updatedUser != null) {
-                db.userDao.updateUser(updatedUser)
-            }
+        val db = DatabaseProvider.getDatabase(activity as ProfileActivity)
+        val user = db.userDao.getUserById(userId)
+        val updatedUser = user?.let {
+            user.copy(
+                userId,
+                it.login,
+                it.password,
+                it.email,
+                gender,
+                height,
+                weight,
+                bmi
+            )
         }
+        if (updatedUser != null) {
+            db.userDao.updateUser(updatedUser)
+            Toast.makeText((activity as ProfileActivity), "Saved!", Toast.LENGTH_SHORT).show()
+        }
+        else
+            Toast.makeText((activity as ProfileActivity), "Oops! Something went wrong. Try again.", Toast.LENGTH_SHORT).show()
     }
 }
