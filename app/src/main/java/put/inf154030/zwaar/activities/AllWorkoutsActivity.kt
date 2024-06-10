@@ -20,7 +20,6 @@ import put.inf154030.zwaar.fragments.NavigationBarFragment
 class AllWorkoutsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAllWorkoutsBinding
-    private val db = DatabaseProvider.getDatabase(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +40,7 @@ class AllWorkoutsActivity : AppCompatActivity() {
         super.onResume()
         val context = this
         lifecycleScope.launch {
+            val db = DatabaseProvider.getDatabase(context)
             val workouts = db.workoutDao.getAllUserWorkouts(UserSession.loggedInUserId)
             val workoutList = binding.recyclerViewWorkoutsList
             workoutList.layoutManager = LinearLayoutManager(context)

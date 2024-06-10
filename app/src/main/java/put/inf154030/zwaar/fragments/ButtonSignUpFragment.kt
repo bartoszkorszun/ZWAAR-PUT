@@ -23,8 +23,6 @@ import put.inf154030.zwaar.entities.User
 
 class ButtonSignUpFragment : Fragment() {
 
-    private val db = DatabaseProvider.getDatabase(requireActivity())
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,7 +36,7 @@ class ButtonSignUpFragment : Fragment() {
                 startActivity(intent)
             }
             if (activity is SignUpActivity){
-
+                val db = DatabaseProvider.getDatabase(requireActivity())
                 val signUpFragment = requireActivity()
                     .supportFragmentManager
                     .findFragmentById(R.id.fragment_container_fields) as FieldsSignUpFragment

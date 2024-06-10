@@ -21,8 +21,6 @@ import put.inf154030.zwaar.database.DatabaseProvider
 
 class ButtonLogInFragment : Fragment() {
 
-    private val db = DatabaseProvider.getDatabase(requireActivity())
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,7 +34,7 @@ class ButtonLogInFragment : Fragment() {
                 startActivity(intent)
             }
             if (activity is LogInActivity) {
-
+                val db = DatabaseProvider.getDatabase(activity as LogInActivity)
                 val logInFragment = requireActivity()
                     .supportFragmentManager
                     .findFragmentById(R.id.fragment_container_fields) as FieldsLogInFragment

@@ -21,8 +21,6 @@ import put.inf154030.zwaar.database.DatabaseProvider
 
 class ButtonSaveChangesFragment : Fragment() {
 
-    private val db = DatabaseProvider.getDatabase(requireActivity())
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -64,6 +62,7 @@ class ButtonSaveChangesFragment : Fragment() {
         weight: Double,
         bmi: Double
         ) {
+        val db = DatabaseProvider.getDatabase(requireActivity())
         val user = db.userDao.getUserById(userId)
         val updatedUser = user?.let {
             user.copy(

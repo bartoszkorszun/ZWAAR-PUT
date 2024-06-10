@@ -10,6 +10,7 @@ import kotlinx.coroutines.launch
 import put.inf154030.zwaar.R
 import put.inf154030.zwaar.UserSession
 import put.inf154030.zwaar.adapters.ExerciseAdapter
+import put.inf154030.zwaar.adapters.GearAdapter
 import put.inf154030.zwaar.database.DatabaseProvider
 import put.inf154030.zwaar.databinding.ActivityMyGearBinding
 import put.inf154030.zwaar.fragments.ButtonAddFragment
@@ -19,7 +20,6 @@ import put.inf154030.zwaar.fragments.NavigationBarFragment
 class MyGearActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMyGearBinding
-    private val db = DatabaseProvider.getDatabase(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,17 +38,18 @@ class MyGearActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         val context = this
-//        lifecycleScope.launch {
-//            val userGears = db.userGearDao.getAllUserGear(UserSession.loggedInUserId)
-//            val gears = db.gearDao.get
-//            val workoutExerciseList = binding.recyclerViewExercisesList
-//            workoutExerciseList.layoutManager = LinearLayoutManager(context)
-//            workoutExerciseList.adapter = ExerciseAdapter(exercises) {exercise ->
-//                val intent = Intent(context, AddExerciseActivity::class.java)
-//                intent.putExtra("exercise_id", exercise.exerciseId)
-//                intent.putExtra("workout_id", workoutId)
-//                startActivity(intent)
-//            }
-//        }
+        lifecycleScope.launch {
+            val db = DatabaseProvider.getDatabase(context)
+            val userGears = db.userGearDao.getAllUserGear(UserSession.loggedInUserId)
+            val gears = db.gearDao.getAllGearById(userGears)
+            val userGearList = binding.recyclerViewGearList
+            userGearList.layoutManager = LinearLayoutManager(context)
+            userGearList.adapter = GearAdapter(gears) {gear ->
+                val intent = Intent(context, AddGearActivity::class.java)
+                intent.putExtra("gear_id", gear.gearId)
+                intent.putExtra("user_id", UserSession.loggedInUserId)
+                startActivity(intent)
+            }
+        }
     }
 }

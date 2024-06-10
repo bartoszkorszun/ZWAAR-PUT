@@ -13,13 +13,13 @@ import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 import put.inf154030.zwaar.R
 import put.inf154030.zwaar.UserSession
+import put.inf154030.zwaar.activities.AddGearActivity
 import put.inf154030.zwaar.database.DatabaseProvider
 import put.inf154030.zwaar.relations.UserGear
 
 class AddGearFragment : Fragment() {
 
     private lateinit var gearMap: Map<String, Int>
-    private val db = DatabaseProvider.getDatabase(requireActivity())
     var gearId: Int = -1
 
     override fun onCreateView(
@@ -31,6 +31,7 @@ class AddGearFragment : Fragment() {
         val addButton = view.findViewById<Button>(R.id.button_add)
 
         lifecycleScope.launch {
+            val db = DatabaseProvider.getDatabase(requireActivity())
             val gearList = db.gearDao.getAll()
             val gearNames = gearList.map { it.name }
             gearMap = gearList.associateBy({ it.name }, { it.gearId })
@@ -45,6 +46,7 @@ class AddGearFragment : Fragment() {
         }
 
         addButton.setOnClickListener {
+            val db = DatabaseProvider.getDatabase(requireActivity())
             lifecycleScope.launch {
                 val userGear = UserGear(
                     0,
@@ -54,6 +56,7 @@ class AddGearFragment : Fragment() {
                 db.userGearDao.insertUserGear(userGear)
                 Toast.makeText(requireContext(), "Gear added :)", Toast.LENGTH_SHORT).show()
             }
+            (activity as AddGearActivity).finish()
         }
 
         return view

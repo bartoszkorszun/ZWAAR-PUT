@@ -22,7 +22,7 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var height: EditText
     private lateinit var weight: EditText
     private lateinit var bmi: TextView
-    private val db = DatabaseProvider.getDatabase(this)
+    private val context = this
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +37,7 @@ class ProfileActivity : AppCompatActivity() {
         bmi = binding.textViewBmi
 
         lifecycleScope.launch {
+            val db = DatabaseProvider.getDatabase(context)
             val user = db.userDao.getUserById(UserSession.loggedInUserId)
             if (user?.height != null) {
                 gender.setText(user.gender)

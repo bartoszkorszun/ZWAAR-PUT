@@ -9,8 +9,8 @@ import put.inf154030.zwaar.relations.UserGear
 @Dao
 interface UserGearDAO {
 
-    @Query("SELECT * FROM user_gear WHERE user_id = :userId")
-    suspend fun getAllUserGear(userId: Int): List<UserGear>
+    @Query("SELECT gear_id FROM user_gear WHERE user_id = :userId")
+    suspend fun getAllUserGear(userId: Int): List<Int>
 
     @Insert
     suspend fun insertUserGear(userGear: UserGear)

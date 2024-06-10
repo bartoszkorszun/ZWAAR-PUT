@@ -19,7 +19,6 @@ class WorkoutActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityWorkoutBinding
     private var workoutId: Int = -1
-    private val db = DatabaseProvider.getDatabase(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +41,7 @@ class WorkoutActivity : AppCompatActivity() {
         super.onResume()
         val context = this
         lifecycleScope.launch {
+            val db = DatabaseProvider.getDatabase(context)
             val workoutExercises = db.workoutExerciseDao.getAllWorkoutExercises(workoutId)
             val exercises = db.exerciseDao.getAllExercisesWhereIdIn(workoutExercises)
             val workoutExerciseList = binding.recyclerViewExercisesList
