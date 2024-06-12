@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import put.inf154030.zwaar.R
 import put.inf154030.zwaar.activities.AllWorkoutsActivity
 import put.inf154030.zwaar.activities.TodaysWorkoutActivity
+import put.inf154030.zwaar.activities.TrainingPlanActivity
 import put.inf154030.zwaar.activities.YourProgressActivity
 
 class MainOptionsFragment : Fragment() {
@@ -36,7 +37,8 @@ class MainOptionsFragment : Fragment() {
         }
 
         trainingPlan.setOnClickListener {
-            //TODO
+            val intent = Intent(requireActivity(), TrainingPlanActivity::class.java)
+            startActivity(intent)
         }
 
         allWorkouts.setOnClickListener {

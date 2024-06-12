@@ -10,9 +10,11 @@ import androidx.fragment.app.Fragment
 import put.inf154030.zwaar.R
 import put.inf154030.zwaar.activities.AddExerciseActivity
 import put.inf154030.zwaar.activities.AddGearActivity
+import put.inf154030.zwaar.activities.AddTrainingPlanActivity
 import put.inf154030.zwaar.activities.AddWorkoutActivity
 import put.inf154030.zwaar.activities.AllWorkoutsActivity
 import put.inf154030.zwaar.activities.MyGearActivity
+import put.inf154030.zwaar.activities.TrainingPlanActivity
 import put.inf154030.zwaar.activities.WorkoutActivity
 
 class ButtonAddFragment : Fragment() {
@@ -37,6 +39,10 @@ class ButtonAddFragment : Fragment() {
             }
             if (activity is MyGearActivity) {
                 val intent = Intent(activity as MyGearActivity, AddGearActivity::class.java)
+                startActivity(intent)
+            }
+            if (activity is TrainingPlanActivity) {
+                val intent = Intent(activity as TrainingPlanActivity, AddTrainingPlanActivity::class.java)
                 startActivity(intent)
             }
         }

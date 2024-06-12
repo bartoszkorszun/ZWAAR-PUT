@@ -18,6 +18,12 @@ import put.inf154030.zwaar.UserSession
 import put.inf154030.zwaar.activities.LogInActivity
 import put.inf154030.zwaar.activities.ProfileActivity
 import put.inf154030.zwaar.database.DatabaseProvider
+import put.inf154030.zwaar.relations.PersonalDataHistory
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.Date
+import java.util.Locale
 
 class ButtonSaveChangesFragment : Fragment() {
 
@@ -41,6 +47,7 @@ class ButtonSaveChangesFragment : Fragment() {
             lifecycleScope.launch {
                 val userId = UserSession.loggedInUserId
                 updateUser(userId, gender, height, weight, bmi)
+                insertUserHistory(userId, weight)
             }
 
             profileActivity.setBMI(bmi)
@@ -82,5 +89,18 @@ class ButtonSaveChangesFragment : Fragment() {
         }
         else
             Toast.makeText((activity as ProfileActivity), "Oops! Something went wrong. Try again.", Toast.LENGTH_SHORT).show()
+    }
+
+    private suspend fun insertUserHistory(userId: Int, weight: Double) {
+        val db = DatabaseProvider.getDatabase(requireActivity())
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val date = Date()
+        val userHistory = PersonalDataHistory(
+            0,
+            userId,
+            dateFormat.format(date),
+            weight
+        )
+        db.personalDataHistoryDao.insertUserHistory(userHistory)
     }
 }

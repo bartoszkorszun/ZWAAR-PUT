@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import put.inf154030.zwaar.R
 import put.inf154030.zwaar.activities.ProfileActivity
 import put.inf154030.zwaar.activities.SettingsActivity
+import put.inf154030.zwaar.activities.TrainingPlanActivity
 
 class NavigationBarFragment : Fragment() {
 
@@ -24,7 +25,8 @@ class NavigationBarFragment : Fragment() {
         val buttonSettings = view.findViewById<ImageButton>(R.id.image_button_settings)
 
         buttonDate.setOnClickListener {
-            //TODO
+            val intent = Intent(requireActivity(), TrainingPlanActivity::class.java)
+            startActivity(intent)
         }
 
         buttonProfile.setOnClickListener {

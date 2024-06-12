@@ -12,4 +12,7 @@ interface WorkoutDAO {
 
     @Insert
     suspend fun insertWorkout(workout: Workout)
+
+    @Query("SELECT * FROM workouts WHERE workoutId = :workoutId")
+    suspend fun getWorkoutById(workoutId: Int): Workout
 }

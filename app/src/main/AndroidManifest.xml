@@ -13,6 +13,15 @@
         android:theme="@style/Theme.ZWAAR"
         tools:targetApi="31">
         <activity
+            android:name=".activities.AddTrainingPlanActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.AddTrainingPlanactivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.TrainingPlanActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.YourProgressActivity"
             android:exported="false" />
         <activity
