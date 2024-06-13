@@ -34,8 +34,9 @@
     <ImageButton
         android:id="@+id/image_button_biometric"
         android:layout_width="174dp"
-        android:layout_height="96dp"
+        android:layout_height="106dp"
         android:scaleType="centerCrop"
+        android:backgroundTint="@android:color/transparent"
         app:layout_constraintTop_toBottomOf="@+id/fragment_container_fields"
         app:layout_constraintBottom_toTopOf="@+id/fragment_container_buttons"
         app:layout_constraintStart_toStartOf="parent"
