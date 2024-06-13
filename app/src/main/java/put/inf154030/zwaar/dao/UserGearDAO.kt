@@ -3,7 +3,6 @@ package put.inf154030.zwaar.dao
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import put.inf154030.zwaar.entities.Gear
 import put.inf154030.zwaar.relations.UserGear
 
 @Dao

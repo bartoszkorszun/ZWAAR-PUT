@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.launch
 import put.inf154030.zwaar.R
 import put.inf154030.zwaar.UserSession
-import put.inf154030.zwaar.adapters.ExerciseAdapter
 import put.inf154030.zwaar.adapters.GearAdapter
 import put.inf154030.zwaar.database.DatabaseProvider
 import put.inf154030.zwaar.databinding.ActivityMyGearBinding

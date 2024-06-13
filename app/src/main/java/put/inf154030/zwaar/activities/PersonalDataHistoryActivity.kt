@@ -1,6 +1,5 @@
 package put.inf154030.zwaar.activities
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -9,7 +8,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.launch
 import put.inf154030.zwaar.R
 import put.inf154030.zwaar.UserSession
-import put.inf154030.zwaar.adapters.ExerciseAdapter
 import put.inf154030.zwaar.adapters.PersonalDataHistoryAdapter
 import put.inf154030.zwaar.database.DatabaseProvider
 import put.inf154030.zwaar.databinding.ActivityPersonalDataHistoryBinding

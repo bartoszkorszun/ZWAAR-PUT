@@ -21,6 +21,7 @@ class ButtonDumbbellFragment : Fragment() {
         val buttonDumbbell = view.findViewById<ImageButton>(R.id.image_button_dumbbell)
         buttonDumbbell.setOnClickListener {
             val intent = Intent(requireActivity(), HomeScreenActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
             startActivity(intent)
         }
 

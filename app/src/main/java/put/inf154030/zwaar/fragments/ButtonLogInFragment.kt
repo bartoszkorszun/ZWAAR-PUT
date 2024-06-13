@@ -49,7 +49,9 @@ class ButtonLogInFragment : Fragment() {
                         UserSession.loggedInUserId = db.userDao.getUserId(login)
 
                         val intent = Intent(requireActivity(), HomeScreenActivity::class.java)
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
                         startActivity(intent)
+                        (activity as LogInActivity).finish()
                     } else {
                         Toast.makeText((activity as LogInActivity), "Password is incorrect!", Toast.LENGTH_SHORT).show()
                     }

@@ -26,16 +26,19 @@ class NavigationBarFragment : Fragment() {
 
         buttonDate.setOnClickListener {
             val intent = Intent(requireActivity(), TrainingPlanActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
             startActivity(intent)
         }
 
         buttonProfile.setOnClickListener {
             val intent = Intent(requireActivity(), ProfileActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
             startActivity(intent)
         }
 
         buttonSettings.setOnClickListener {
             val intent = Intent(requireActivity(), SettingsActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
             startActivity(intent)
         }
 

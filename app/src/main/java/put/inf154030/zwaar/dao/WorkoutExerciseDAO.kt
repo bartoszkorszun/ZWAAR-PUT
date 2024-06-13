@@ -12,6 +12,9 @@ interface WorkoutExerciseDAO {
     @Query("SELECT exercise_id FROM workout_exercise WHERE workout_id = :workoutId")
     suspend fun getAllWorkoutExercises(workoutId: Int): List<Int>
 
+    @Query("SELECT * FROM workout_exercise WHERE workout_id = :workoutId")
+    suspend fun getWorkoutExerciseList(workoutId: Int): List<WorkoutExercise>
+
     @Insert
     suspend fun insertWorkoutExercise(workoutExercise: WorkoutExercise)
 
@@ -29,4 +32,7 @@ interface WorkoutExerciseDAO {
 
     @Query("SELECT * FROM workout_exercise WHERE workout_id = :workoutId AND exercise_id = :exerciseId")
     suspend fun getWorkoutExerciseByIds(workoutId: Int, exerciseId: Int): WorkoutExercise
+
+    @Query("SELECT * FROM workout_exercise WHERE id IN (:ids)")
+    suspend fun getWorkoutExerciseByIds(ids: List<Int>): List<WorkoutExercise>
 }

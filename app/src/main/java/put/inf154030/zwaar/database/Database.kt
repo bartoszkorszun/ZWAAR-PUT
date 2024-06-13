@@ -2,9 +2,12 @@ package put.inf154030.zwaar.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import put.inf154030.zwaar.Converters
 import put.inf154030.zwaar.dao.ExerciseDAO
 import put.inf154030.zwaar.dao.GearDAO
 import put.inf154030.zwaar.dao.PersonalDataHistoryDAO
+import put.inf154030.zwaar.dao.TrainingDataHistoryDAO
 import put.inf154030.zwaar.dao.TrainingPlanDAO
 import put.inf154030.zwaar.dao.UserDAO
 import put.inf154030.zwaar.dao.UserGearDAO
@@ -16,6 +19,7 @@ import put.inf154030.zwaar.entities.TrainingPlan
 import put.inf154030.zwaar.entities.User
 import put.inf154030.zwaar.entities.Workout
 import put.inf154030.zwaar.relations.PersonalDataHistory
+import put.inf154030.zwaar.relations.TrainingDataHistory
 import put.inf154030.zwaar.relations.UserGear
 import put.inf154030.zwaar.relations.WorkoutExercise
 
@@ -28,10 +32,12 @@ import put.inf154030.zwaar.relations.WorkoutExercise
         WorkoutExercise::class,
         UserGear::class,
         PersonalDataHistory::class,
-        TrainingPlan::class
+        TrainingPlan::class,
+        TrainingDataHistory::class
                ],
     version = 1
 )
+@TypeConverters(Converters::class)
 abstract class Database : RoomDatabase() {
 
     abstract val userDao: UserDAO
@@ -42,4 +48,5 @@ abstract class Database : RoomDatabase() {
     abstract val userGearDao: UserGearDAO
     abstract val personalDataHistoryDao: PersonalDataHistoryDAO
     abstract val trainingPlanDao: TrainingPlanDAO
+    abstract val trainingDataHistoryDao: TrainingDataHistoryDAO
 }

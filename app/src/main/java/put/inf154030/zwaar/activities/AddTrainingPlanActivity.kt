@@ -3,8 +3,6 @@ package put.inf154030.zwaar.activities
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import put.inf154030.zwaar.R
 import put.inf154030.zwaar.databinding.ActivityAddTrainingPlanBinding
 import put.inf154030.zwaar.fragments.AddTrainingPlanFragment

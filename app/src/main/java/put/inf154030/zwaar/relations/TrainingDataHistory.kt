@@ -4,10 +4,11 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity("personal_data_history")
-data class PersonalDataHistory(
+@Entity("training_data_history")
+data class TrainingDataHistory(
     @PrimaryKey(autoGenerate = true) val id: Int,
     @ColumnInfo("user_id") val userId: Int,
+    @ColumnInfo("name") val name: String,
     @ColumnInfo("date") val date: String,
-    @ColumnInfo("weight") val weight: Double
+    @ColumnInfo("workout_exercise_ids") val workoutExerciseIds: String
 )

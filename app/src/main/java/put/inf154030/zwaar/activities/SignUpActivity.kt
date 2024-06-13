@@ -1,6 +1,5 @@
 package put.inf154030.zwaar.activities
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.CheckBox
 import androidx.activity.enableEdgeToEdge

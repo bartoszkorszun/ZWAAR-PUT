@@ -38,6 +38,7 @@ class MainOptionsFragment : Fragment() {
 
         trainingPlan.setOnClickListener {
             val intent = Intent(requireActivity(), TrainingPlanActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
             startActivity(intent)
         }
 

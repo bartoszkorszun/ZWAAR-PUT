@@ -15,4 +15,7 @@ interface WorkoutDAO {
 
     @Query("SELECT * FROM workouts WHERE workoutId = :workoutId")
     suspend fun getWorkoutById(workoutId: Int): Workout
+
+    @Query("SELECT * FROM workouts WHERE name = :name AND user_id = :userId")
+    suspend fun getWorkoutByName(name: String, userId: Int): Workout
 }

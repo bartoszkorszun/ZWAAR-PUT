@@ -14,9 +14,6 @@ import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 import put.inf154030.zwaar.R
 import put.inf154030.zwaar.activities.AddExerciseActivity
-import put.inf154030.zwaar.activities.AddWorkoutActivity
-import put.inf154030.zwaar.activities.ProfileActivity
-import put.inf154030.zwaar.database.Database
 import put.inf154030.zwaar.database.DatabaseProvider
 import put.inf154030.zwaar.relations.WorkoutExercise
 

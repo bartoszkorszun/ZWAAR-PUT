@@ -2,26 +2,20 @@ package put.inf154030.zwaar.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.os.Looper
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import put.inf154030.zwaar.R
 import put.inf154030.zwaar.UserSession
-import put.inf154030.zwaar.activities.LogInActivity
 import put.inf154030.zwaar.activities.ProfileActivity
 import put.inf154030.zwaar.database.DatabaseProvider
 import put.inf154030.zwaar.relations.PersonalDataHistory
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import java.util.Date
 import java.util.Locale
 

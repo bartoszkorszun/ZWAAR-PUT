@@ -24,11 +24,13 @@ class YourProgressOptionsFragment : Fragment() {
 
         trainingHistory.setOnClickListener {
             val intent = Intent(requireActivity(), TrainingHistoryActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
             startActivity(intent)
         }
 
         personalDataHistory.setOnClickListener {
             val intent = Intent(requireActivity(), PersonalDataHistoryActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
             startActivity(intent)
         }
 

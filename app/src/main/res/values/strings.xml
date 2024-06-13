@@ -47,4 +47,5 @@
     <string name="select_workout">Select workout</string>
     <string name="exercise_name">Exercise name</string>
     <string name="tmp">0 x 0 x 0kg</string>
+    <string name="tmp_workout_name">XX.XX - Workout Name</string>
 </resources>
