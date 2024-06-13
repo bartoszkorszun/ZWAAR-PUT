@@ -26,10 +26,22 @@
         android:id="@+id/fragment_container_fields"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/fragment_container_buttons"
+        app:layout_constraintBottom_toTopOf="@id/image_button_biometric"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_view_name" />
+
+    <ImageButton
+        android:id="@+id/image_button_biometric"
+        android:layout_width="174dp"
+        android:layout_height="96dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_container_fields"
+        app:layout_constraintBottom_toTopOf="@+id/fragment_container_buttons"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/biometrics"
+        tools:ignore="ContentDescription" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_container_buttons"
@@ -38,6 +50,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment_container_fields" />
+        app:layout_constraintTop_toBottomOf="@id/image_button_biometric" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

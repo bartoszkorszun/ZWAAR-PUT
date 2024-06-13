@@ -47,11 +47,13 @@ class ProfileActivity : AppCompatActivity() {
             }
         }
 
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container_dumbbell, ButtonDumbbellFragment())
-            .replace(R.id.fragment_container_save_changes, ButtonSaveChangesFragment())
-            .replace(R.id.fragment_container_nav_bar, NavigationBarFragment())
-            .commit()
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container_dumbbell, ButtonDumbbellFragment())
+                .replace(R.id.fragment_container_save_changes, ButtonSaveChangesFragment())
+                .replace(R.id.fragment_container_nav_bar, NavigationBarFragment())
+                .commit()
+        }
     }
 
     fun getGender(): String {

@@ -7,6 +7,7 @@ import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 import put.inf154030.zwaar.database.DatabaseProvider
 import put.inf154030.zwaar.databinding.ActivityMainBinding
+import put.inf154030.zwaar.entities.Settings
 import put.inf154030.zwaar.fragments.ButtonLogInFragment
 import put.inf154030.zwaar.fragments.ButtonSignUpFragment
 
@@ -21,14 +22,17 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportFragmentManager.beginTransaction()
-            .add(R.id.fragment_container_buttons, ButtonSignUpFragment())
-            .add(R.id.fragment_container_buttons, ButtonLogInFragment())
-            .commit()
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .add(R.id.fragment_container_buttons, ButtonSignUpFragment())
+                .add(R.id.fragment_container_buttons, ButtonLogInFragment())
+                .commit()
+        }
 
         lifecycleScope.launch {
             checkGear()
             checkExercises()
+            checkSettings()
         }
     }
 
@@ -48,5 +52,16 @@ class MainActivity : AppCompatActivity() {
         Exercises.exercisesList.forEach {exercise ->
             db.exerciseDao.insertExercise(exercise)
         }
+    }
+
+    private suspend fun checkSettings() {
+        val db = DatabaseProvider.getDatabase(this)
+        val settingsCheck = db.settingsDao.getAll()
+        if (settingsCheck != null) return
+        val settings = Settings(
+            1,
+            true
+        )
+        db.settingsDao.initSettings(settings)
     }
 }

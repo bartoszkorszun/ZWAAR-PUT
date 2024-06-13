@@ -21,10 +21,12 @@ class AddExerciseActivity : AppCompatActivity() {
         binding = ActivityAddExerciseBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container_dumbbell, ButtonDumbbellFragment())
-            .replace(R.id.fragment_container_add_exercise, AddExerciseFragment())
-            .commit()
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container_dumbbell, ButtonDumbbellFragment())
+                .replace(R.id.fragment_container_add_exercise, AddExerciseFragment())
+                .commit()
+        }
 
         workoutId = intent.getIntExtra("workout_id", 0)
         exerciseId = intent.getIntExtra("exercise_id", 0)

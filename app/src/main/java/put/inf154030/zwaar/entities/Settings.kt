@@ -1,8 +1,11 @@
 package put.inf154030.zwaar.entities
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-@Entity(tableName = "settings")
+@Entity("settings")
 data class Settings(
-    val notifications: Boolean
+    @PrimaryKey val id: Int,
+    @ColumnInfo("notifications") val notifications: Boolean
 )

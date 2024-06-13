@@ -1,7 +1,11 @@
 package put.inf154030.zwaar.fragments
 
 import android.annotation.SuppressLint
+import android.app.AlarmManager
 import android.app.DatePickerDialog
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -16,9 +20,11 @@ import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
+import put.inf154030.zwaar.NotificationReceiver
 import put.inf154030.zwaar.R
 import put.inf154030.zwaar.UserSession
 import put.inf154030.zwaar.activities.AddTrainingPlanActivity
+import put.inf154030.zwaar.activities.TrainingPlanActivity
 import put.inf154030.zwaar.database.DatabaseProvider
 import put.inf154030.zwaar.entities.TrainingPlan
 import java.text.SimpleDateFormat
@@ -28,7 +34,6 @@ import java.util.Locale
 
 class AddTrainingPlanFragment : Fragment() {
 
-    private lateinit var editTextDate: EditText
     private lateinit var workoutMap: Map<String, Int>
     var workoutId: Int = -1
     @SuppressLint("ClickableViewAccessibility")
@@ -40,22 +45,7 @@ class AddTrainingPlanFragment : Fragment() {
         val autoCompleteTextView = view.findViewById<AutoCompleteTextView>(R.id.auto_complete_select_workout)
         val addButton = view.findViewById<Button>(R.id.button_add)
 
-        editTextDate = view.findViewById(R.id.edit_text_date)
-        val currentDate = getCurrentDate()
-        editTextDate.setText(currentDate)
-
-        editTextDate.setCompoundDrawablesWithIntrinsicBounds(
-            null, null, getDrawable(requireContext(), R.drawable.ic_action_date), null
-        )
-        editTextDate.setOnTouchListener { v, event ->
-            if (event.action == MotionEvent.ACTION_UP) {
-                if (event.rawX >= (editTextDate.right - editTextDate.compoundPaddingRight)) {
-                    showDatePickerDialog()
-                    return@setOnTouchListener true
-                }
-            }
-            false
-        }
+        val selectedDate = (activity as AddTrainingPlanActivity).getSelectedDate()
 
         val userId = UserSession.loggedInUserId
         lifecycleScope.launch {
@@ -72,43 +62,34 @@ class AddTrainingPlanFragment : Fragment() {
             if (selectedWorkout != null)
                 workoutId = selectedWorkout
         }
-
+        val convertedDate = convertDateFormat(selectedDate)
         addButton.setOnClickListener {
             val db = DatabaseProvider.getDatabase(requireActivity())
             lifecycleScope.launch {
                 val trainingPlan = TrainingPlan(
                     0,
-                    convertDateFormat(editTextDate.text.toString()),
+                    convertedDate,
                     workoutId,
                     userId
                 )
                 db.trainingPlanDao.insertTrainingPlan(trainingPlan)
                 Toast.makeText(requireContext(), "Training plan added :)", Toast.LENGTH_SHORT).show()
+
+                val workoutDate = stringToCalendar(convertedDate)?.apply {
+                    set(Calendar.HOUR_OF_DAY, 9)
+                    set(Calendar.MINUTE, 0)
+                }
+
+                val workout = db.workoutDao.getWorkoutById(workoutId)
+
+                if (workoutDate != null) {
+                    scheduleWorkoutNotification(requireContext(), workoutDate, workout.name)
+                }
             }
             (activity as AddTrainingPlanActivity).finish()
         }
 
         return view
-    }
-
-    private fun getCurrentDate(): String {
-        val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-        val date = Calendar.getInstance().time
-        return dateFormat.format(date)
-    }
-
-    private fun showDatePickerDialog() {
-        val calendar = Calendar.getInstance()
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH)
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
-
-        val datePickerDialog = DatePickerDialog(requireContext(), { _, selectedYear, selectedMonth, selectedDay ->
-            val selectedDate = String.format(Locale.getDefault(), "%02d/%02d/%04d", selectedDay, selectedMonth + 1, selectedYear)
-            editTextDate.setText(selectedDate)
-        }, year, month, day)
-
-        datePickerDialog.show()
     }
 
     private fun convertDateFormat(inputDate: String): String {
@@ -118,5 +99,31 @@ class AddTrainingPlanFragment : Fragment() {
         val date = inputFormat.parse(inputDate)
 
         return outputFormat.format(date as Date)
+    }
+
+    @SuppressLint("ScheduleExactAlarm")
+    fun scheduleWorkoutNotification(context: Context, workoutDate: Calendar, workoutName: String) {
+        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+        val intent = Intent(context, NotificationReceiver::class.java).apply {
+            putExtra("WORKOUT_NAME", workoutName)
+        }
+        val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
+
+        alarmManager.setExact(
+            AlarmManager.RTC_WAKEUP,
+            workoutDate.timeInMillis,
+            pendingIntent
+        )
+    }
+
+    fun stringToCalendar(dateString: String): Calendar? {
+        val format = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val date = format.parse(dateString)
+        return if (date != null) {
+            Calendar.getInstance().apply { time = date }
+        } else {
+            null
+        }
     }
 }

@@ -74,14 +74,10 @@ class ButtonSignUpFragment : Fragment() {
                                 startActivity(intent)
                                 (activity as SignUpActivity).finish()
                             } else {
-                                withContext(Dispatchers.Main) {
-                                    Toast.makeText((activity as SignUpActivity), "Incorrect e-mail address", Toast.LENGTH_SHORT).show()
-                                }
+                                Toast.makeText((activity as SignUpActivity), "Incorrect e-mail address", Toast.LENGTH_SHORT).show()
                             }
                         } else {
-                            withContext(Dispatchers.Main) {
-                                Toast.makeText((activity as SignUpActivity), "This user already exists!", Toast.LENGTH_SHORT).show()
-                            }
+                            Toast.makeText((activity as SignUpActivity), "This user already exists!", Toast.LENGTH_SHORT).show()
                         }
                     }
 

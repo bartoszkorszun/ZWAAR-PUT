@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import put.inf154030.zwaar.R
 import put.inf154030.zwaar.entities.Workout
 
-class WorkoutItemAdapter(private val workout: Workout?): RecyclerView.Adapter<WorkoutItemAdapter.WorkoutViewHolder>() {
+class WorkoutItemAdapter(
+    private val workout: Workout?
+): RecyclerView.Adapter<WorkoutItemAdapter.WorkoutViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WorkoutViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)

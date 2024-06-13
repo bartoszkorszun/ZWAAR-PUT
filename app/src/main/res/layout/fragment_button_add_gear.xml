@@ -10,7 +10,7 @@
         android:id="@+id/button_add_gear"
         android:layout_width="241dp"
         android:layout_height="53dp"
-        android:text="@string/add_training_gear"
+        android:text="@string/my_gear"
         android:textSize="20sp"
         android:layout_margin="16dp"
         android:fontFamily="@font/poppins_regular"

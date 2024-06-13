@@ -87,19 +87,24 @@ class AddExerciseFragment : Fragment() {
             } else {
                 lifecycleScope.launch {
                     val db = DatabaseProvider.getDatabase(requireActivity())
-                    val workoutExercise = WorkoutExercise(
-                        0,
-                        workoutId,
-                        exerciseId,
-                        weight.text.toString().toDouble(),
-                        quantity.text.toString().toInt(),
-                        series.text.toString().toInt()
-                    )
-                    db.workoutExerciseDao.insertWorkoutExercise(workoutExercise)
-                    Toast.makeText((activity as AddExerciseActivity), "Exercise added :)", Toast.LENGTH_SHORT).show()
+                    val checkWorkoutExercise = db.workoutExerciseDao.getWorkoutExerciseByIds(workoutId, exerciseId)
+                    if (checkWorkoutExercise == null) {
+                        val workoutExercise = WorkoutExercise(
+                            0,
+                            workoutId,
+                            exerciseId,
+                            weight.text.toString().toDouble(),
+                            quantity.text.toString().toInt(),
+                            series.text.toString().toInt()
+                        )
+                        db.workoutExerciseDao.insertWorkoutExercise(workoutExercise)
+                        Toast.makeText((activity as AddExerciseActivity), "Exercise added :)", Toast.LENGTH_SHORT).show()
+                        (activity as AddExerciseActivity).finish()
+                    } else {
+                        Toast.makeText((activity as AddExerciseActivity), "Exercise already exists in this workout", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
-            (activity as AddExerciseActivity).finish()
         }
 
         return view

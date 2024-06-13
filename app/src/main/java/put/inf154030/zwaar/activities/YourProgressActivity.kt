@@ -20,10 +20,12 @@ class YourProgressActivity : AppCompatActivity() {
         binding = ActivityYourProgressBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container_dumbbell, ButtonDumbbellFragment())
-            .replace(R.id.fragment_container_options, YourProgressOptionsFragment())
-            .replace(R.id.fragment_container_nav_bar, NavigationBarFragment())
-            .commit()
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container_dumbbell, ButtonDumbbellFragment())
+                .replace(R.id.fragment_container_options, YourProgressOptionsFragment())
+                .replace(R.id.fragment_container_nav_bar, NavigationBarFragment())
+                .commit()
+        }
     }
 }

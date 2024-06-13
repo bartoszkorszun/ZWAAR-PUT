@@ -25,10 +25,12 @@ class HomeScreenActivity : AppCompatActivity() {
         binding = ActivityHomeScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container_options, MainOptionsFragment())
-            .replace(R.id.fragment_container_nav_bar, NavigationBarFragment())
-            .commit()
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container_options, MainOptionsFragment())
+                .replace(R.id.fragment_container_nav_bar, NavigationBarFragment())
+                .commit()
+        }
 
         val context = this
         lifecycleScope.launch {

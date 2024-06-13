@@ -19,9 +19,11 @@ class AddWorkoutActivity : AppCompatActivity() {
         binding = ActivityAddWorkoutBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container_dumbbell, ButtonDumbbellFragment())
-            .replace(R.id.fragment_container_add_workout, AddWorkoutFragment())
-            .commit()
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container_dumbbell, ButtonDumbbellFragment())
+                .replace(R.id.fragment_container_add_workout, AddWorkoutFragment())
+                .commit()
+        }
     }
 }

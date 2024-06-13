@@ -21,10 +21,12 @@ class SignUpActivity : AppCompatActivity() {
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container_fields, FieldsSignUpFragment())
-            .replace(R.id.fragment_container_button, ButtonSignUpFragment())
-            .commit()
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container_fields, FieldsSignUpFragment())
+                .replace(R.id.fragment_container_button, ButtonSignUpFragment())
+                .commit()
+        }
 
         checkboxAgreement = binding.checkboxAgreement
     }

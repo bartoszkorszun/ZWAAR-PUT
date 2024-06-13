@@ -2,6 +2,7 @@ package put.inf154030.zwaar.activities
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.MotionEvent
 import android.widget.EditText
@@ -57,15 +58,16 @@ class TrainingPlanActivity : AppCompatActivity() {
 
         checkIfWorkoutExists(selectedDate)
 
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container_dumbbell, ButtonDumbbellFragment())
-            .replace(R.id.fragment_container_nav_bar, NavigationBarFragment())
-            .commit()
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container_dumbbell, ButtonDumbbellFragment())
+                .replace(R.id.fragment_container_nav_bar, NavigationBarFragment())
+                .commit()
+        }
     }
 
     override fun onResume() {
         super.onResume()
-
         checkIfWorkoutExists(selectedDate)
     }
 
@@ -127,5 +129,9 @@ class TrainingPlanActivity : AppCompatActivity() {
         val date = inputFormat.parse(inputDate)
 
         return outputFormat.format(date as Date)
+    }
+
+    fun getSelectedDate(): String {
+        return selectedDate
     }
 }

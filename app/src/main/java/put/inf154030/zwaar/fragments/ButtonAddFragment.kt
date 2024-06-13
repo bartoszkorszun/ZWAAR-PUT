@@ -43,6 +43,7 @@ class ButtonAddFragment : Fragment() {
             }
             if (activity is TrainingPlanActivity) {
                 val intent = Intent(activity as TrainingPlanActivity, AddTrainingPlanActivity::class.java)
+                intent.putExtra("selected_date", (activity as TrainingPlanActivity).getSelectedDate())
                 startActivity(intent)
             }
         }

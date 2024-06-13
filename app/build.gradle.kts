@@ -48,6 +48,8 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.biometric.ktx)
+    implementation(libs.androidx.biometric)
     //noinspection KaptUsageInsteadOfKsp
     kapt(libs.androidx.room.compiler)
     testImplementation(libs.junit)

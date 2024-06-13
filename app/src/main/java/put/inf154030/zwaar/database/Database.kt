@@ -7,6 +7,7 @@ import put.inf154030.zwaar.Converters
 import put.inf154030.zwaar.dao.ExerciseDAO
 import put.inf154030.zwaar.dao.GearDAO
 import put.inf154030.zwaar.dao.PersonalDataHistoryDAO
+import put.inf154030.zwaar.dao.SettingsDAO
 import put.inf154030.zwaar.dao.TrainingDataHistoryDAO
 import put.inf154030.zwaar.dao.TrainingPlanDAO
 import put.inf154030.zwaar.dao.UserDAO
@@ -15,6 +16,7 @@ import put.inf154030.zwaar.dao.WorkoutDAO
 import put.inf154030.zwaar.dao.WorkoutExerciseDAO
 import put.inf154030.zwaar.entities.Exercise
 import put.inf154030.zwaar.entities.Gear
+import put.inf154030.zwaar.entities.Settings
 import put.inf154030.zwaar.entities.TrainingPlan
 import put.inf154030.zwaar.entities.User
 import put.inf154030.zwaar.entities.Workout
@@ -33,7 +35,8 @@ import put.inf154030.zwaar.relations.WorkoutExercise
         UserGear::class,
         PersonalDataHistory::class,
         TrainingPlan::class,
-        TrainingDataHistory::class
+        TrainingDataHistory::class,
+        Settings::class
                ],
     version = 1
 )
@@ -49,4 +52,5 @@ abstract class Database : RoomDatabase() {
     abstract val personalDataHistoryDao: PersonalDataHistoryDAO
     abstract val trainingPlanDao: TrainingPlanDAO
     abstract val trainingDataHistoryDao: TrainingDataHistoryDAO
+    abstract val settingsDao: SettingsDAO
 }
