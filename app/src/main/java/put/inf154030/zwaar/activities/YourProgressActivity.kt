@@ -15,7 +15,6 @@ class YourProgressActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
 
         binding = ActivityYourProgressBinding.inflate(layoutInflater)
         setContentView(binding.root)

@@ -20,7 +20,6 @@ class TrainingHistoryActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
 
         binding = ActivityTrainingHistoryBinding.inflate(layoutInflater)
         setContentView(binding.root)

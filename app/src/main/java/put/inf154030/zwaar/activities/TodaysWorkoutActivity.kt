@@ -29,7 +29,6 @@ class TodaysWorkoutActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
 
         binding = ActivityTodaysWorkoutBinding.inflate(layoutInflater)
         setContentView(binding.root)

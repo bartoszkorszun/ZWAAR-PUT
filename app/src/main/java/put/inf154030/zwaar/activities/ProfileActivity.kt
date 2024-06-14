@@ -26,7 +26,6 @@ class ProfileActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
 
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)

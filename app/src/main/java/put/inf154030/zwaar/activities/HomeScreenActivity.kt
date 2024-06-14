@@ -20,7 +20,6 @@ class HomeScreenActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
 
         binding = ActivityHomeScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)

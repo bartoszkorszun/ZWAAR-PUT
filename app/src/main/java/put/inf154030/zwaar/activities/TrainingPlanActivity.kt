@@ -33,7 +33,6 @@ class TrainingPlanActivity : AppCompatActivity() {
     @SuppressLint("ClickableViewAccessibility", "UseCompatLoadingForDrawables")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
 
         binding = ActivityTrainingPlanBinding.inflate(layoutInflater)
         setContentView(binding.root)
