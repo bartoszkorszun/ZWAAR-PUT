@@ -2,18 +2,22 @@ package put.inf154030.zwaar.activities
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import put.inf154030.zwaar.Converters
 import put.inf154030.zwaar.R
 import put.inf154030.zwaar.UserSession
 import put.inf154030.zwaar.adapters.TodaysWorkoutAdapter
+import put.inf154030.zwaar.database.Database
 import put.inf154030.zwaar.database.DatabaseProvider
 import put.inf154030.zwaar.databinding.ActivityTodaysWorkoutBinding
+import put.inf154030.zwaar.entities.TrainingPlan
 import put.inf154030.zwaar.fragments.ButtonDumbbellFragment
 import put.inf154030.zwaar.fragments.NavigationBarFragment
 import put.inf154030.zwaar.relations.TrainingDataHistory
@@ -73,6 +77,7 @@ class TodaysWorkoutActivity : AppCompatActivity() {
                                     )
                                 }
                                 db.trainingDataHistoryDao.update(updatedData)
+                                checkIfAllDone(db, todaysWorkout.workoutId, doneExercisesList, todaysWorkout)
                             } else {
                                 val trainingDataHistory = TrainingDataHistory(
                                     0,
@@ -83,6 +88,7 @@ class TodaysWorkoutActivity : AppCompatActivity() {
                                 )
                                 db.trainingDataHistoryDao.insert(trainingDataHistory)
                                 isInsert = false
+                                checkIfAllDone(db, todaysWorkout.workoutId, doneExercisesList, todaysWorkout)
                             }
                         } else {
                             doneExercisesList.remove(workoutExercise.id)
@@ -97,9 +103,27 @@ class TodaysWorkoutActivity : AppCompatActivity() {
                                 )
                             }
                             db.trainingDataHistoryDao.update(updatedData)
+                            checkIfAllDone(db, todaysWorkout.workoutId, doneExercisesList, todaysWorkout)
                         }
                     }
                 }
+            }
+        }
+    }
+
+    private suspend fun checkIfAllDone(db: Database, workoutId: Int, exerciseList: List<Int>, todaysWorkout: TrainingPlan) {
+        val workoutExerciseList = db.workoutExerciseDao.getWorkoutExerciseList(workoutId)
+        if (workoutExerciseList.size == exerciseList.size) {
+            db.trainingPlanDao.deleteTrainingPlan(todaysWorkout)
+            val thisActivity = this
+            withContext(Dispatchers.Main) {
+                val alertDialog = AlertDialog.Builder(thisActivity)
+                    .setMessage("Training finished, your progress has been saved to database!")
+                    .setPositiveButton("Ok") { _, _ ->
+                        thisActivity.finish()
+                    }
+                    .create()
+                alertDialog.show()
             }
         }
     }

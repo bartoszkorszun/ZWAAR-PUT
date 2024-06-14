@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Switch
 import android.widget.Toast
+import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
@@ -26,6 +28,7 @@ class AddWorkoutFragment : Fragment() {
 
         val editTextWorkoutName = view.findViewById<EditText>(R.id.edit_text_enter_name)
         val buttonAdd = view.findViewById<Button>(R.id.button_add)
+        val switchHomeWorkout = view.findViewById<SwitchCompat>(R.id.switch_home_workout)
 
         buttonAdd.setOnClickListener {
 
@@ -37,11 +40,17 @@ class AddWorkoutFragment : Fragment() {
             lifecycleScope.launch {
                 val db = DatabaseProvider.getDatabase(requireActivity())
                 val checkWorkout = db.workoutDao.getWorkoutByName(editTextWorkoutName.text.toString(), UserSession.loggedInUserId)
+                var workoutName: String
+                if (switchHomeWorkout.isChecked)
+                    workoutName = editTextWorkoutName.text.toString() + " - Home"
+                else
+                    workoutName = editTextWorkoutName.text.toString()
                 if (checkWorkout == null) {
                     val workout = Workout(
                         0,
-                        editTextWorkoutName.text.toString(),
-                        UserSession.loggedInUserId
+                        workoutName,
+                        UserSession.loggedInUserId,
+                        switchHomeWorkout.isChecked
                     )
                     db.workoutDao.insertWorkout(workout)
                     Toast.makeText((activity as AddWorkoutActivity), "Workout created :)", Toast.LENGTH_SHORT).show()

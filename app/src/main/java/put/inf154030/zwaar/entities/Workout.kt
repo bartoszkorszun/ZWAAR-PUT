@@ -8,5 +8,6 @@ import androidx.room.PrimaryKey
 data class Workout(
     @PrimaryKey(autoGenerate = true) val workoutId: Int,
     @ColumnInfo("name") val name: String,
-    @ColumnInfo("user_id") val userId: Int
+    @ColumnInfo("user_id") val userId: Int,
+    @ColumnInfo("is_home") val isHome: Boolean
 )

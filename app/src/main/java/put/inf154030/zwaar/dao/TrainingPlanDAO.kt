@@ -1,6 +1,7 @@
 package put.inf154030.zwaar.dao
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import put.inf154030.zwaar.entities.TrainingPlan
@@ -13,4 +14,7 @@ interface TrainingPlanDAO {
 
     @Query("SELECT * FROM training_plans WHERE date = :date AND user_id = :userId")
     suspend fun getTrainingPlanByDate(date: String, userId: Int): TrainingPlan
+
+    @Delete
+    suspend fun deleteTrainingPlan(trainingPlan: TrainingPlan)
 }

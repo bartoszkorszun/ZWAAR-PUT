@@ -12,9 +12,12 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
+import put.inf154030.zwaar.Exercises
 import put.inf154030.zwaar.R
+import put.inf154030.zwaar.UserSession
 import put.inf154030.zwaar.activities.AddExerciseActivity
 import put.inf154030.zwaar.database.DatabaseProvider
+import put.inf154030.zwaar.entities.Exercise
 import put.inf154030.zwaar.relations.WorkoutExercise
 
 class AddExerciseFragment : Fragment() {
@@ -40,7 +43,14 @@ class AddExerciseFragment : Fragment() {
 
         lifecycleScope.launch {
             val db = DatabaseProvider.getDatabase(requireActivity())
-            val exercises = db.exerciseDao.getAll()
+            val workout = db.workoutDao.getWorkoutById(workoutId)
+            var exercises: List<Exercise>
+            if (workout.isHome) {
+                val userGearList = db.userGearDao.getAllUserGear(UserSession.loggedInUserId)
+                exercises = db.exerciseDao.getExercisesByGearId(userGearList)
+            } else {
+                exercises = db.exerciseDao.getAll()
+            }
             val exerciseNames = exercises.map { it.name }
             exerciseMap = exercises.associateBy({ it.name }, {it.exerciseId})
             val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, exerciseNames)
